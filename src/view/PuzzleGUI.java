@@ -8,25 +8,27 @@ import java.io.File;
 
 /**
  * Clase que representa la GUI principal.
- * @author Miguel Ángel
+ * @author Miguel Ã�ngel
  * @version 1.0
  */
 public class PuzzleGUI extends JFrame{
 
-    //Instancia singleton
+	//Instancia singleton
     public static PuzzleGUI instance = null;
     //Controlador
     public static AbstractController controller;
-    //Número de filas
+    //NÃºmero de filas
     public static int rowNum=0;
-    //Número de columnas
+    //NÃºmero de columnas
     public static int columnNum =0;
-    //Tamaño de imagen
+    //TamaÃ±o de imagen
     public static int imageSize =0;
     //Array de imagenes
     public static String[] imageList = null;
     //Panel de juego
     private BoardView boardView;
+    //imagen
+    private static File file = null;
 
 
     /**
@@ -34,7 +36,13 @@ public class PuzzleGUI extends JFrame{
      */
     private PuzzleGUI(){
         super("GMD PuzzleGUI");
-        boardView = new BoardView(rowNum,columnNum,imageSize,imageList);
+        
+        if (file!=null) {
+        	boardView = new BoardView(rowNum,columnNum,imageSize,file);
+        } else {
+        	boardView = new BoardView(rowNum,columnNum,imageSize,imageList);
+        }
+        
         boardView.addMouseListener(controller);
         this.getContentPane().setLayout(new BorderLayout());
         this.setJMenuBar(createMenuBar());
@@ -61,19 +69,28 @@ public class PuzzleGUI extends JFrame{
         PuzzleGUI.imageSize = imageSize;
         PuzzleGUI.imageList = imageList;
     }
+    
+    public static void initialize(AbstractController controller, int rowNum,int columnNum,int imageSize, File imageFile){
+        PuzzleGUI.controller = controller;
+        PuzzleGUI.rowNum = rowNum;
+        PuzzleGUI.columnNum = columnNum;
+        PuzzleGUI.imageSize = imageSize;
+        PuzzleGUI.file = imageFile;
+    }
 
-    //Método que crea el panel inferior
+    //MÃ©todo que crea el panel inferior
     private JPanel createSouthPanel(){
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JButton clutterButton = new JButton("Desordenar");//botón de desordenar
+        JButton clutterButton = new JButton("Desordenar");//botÃ³n de desordenar
         clutterButton.setActionCommand("clutter");
         JButton solveButton = new JButton("Resolver");
         solveButton.setActionCommand("solve");
 
         clutterButton.addActionListener(controller);
         solveButton.addActionListener(controller);
+        
 
 
         southPanel.add(clutterButton);
@@ -82,7 +99,7 @@ public class PuzzleGUI extends JFrame{
         return(southPanel);
     }
 
-    //Método que genera la barra de menus
+    //MÃ©todo que genera la barra de menus
     private JMenuBar createMenuBar(){
         JMenuBar menu = new JMenuBar();
         JMenu archive = new JMenu("Archive");
@@ -126,7 +143,7 @@ public class PuzzleGUI extends JFrame{
         return(this.boardView);
     }
 
-    //Método para actualizar la imagen del tablero
+    //MÃ©todo para actualizar la imagen del tablero
     public void updateBoard(File imageFile){
 
     }

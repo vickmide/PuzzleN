@@ -9,11 +9,12 @@ import java.util.ArrayList;
 
 /**
  * Interfaz que tiene que ser implementada por un controlador.
- * @author Miguel Ángel
+ * @author Miguel Ã�ngel
  * @version 1.0
  */
 public abstract class AbstractController extends MouseAdapter implements ActionListener, Observable {
     protected ArrayList<Observer> observerList;
+    
     public AbstractController(){
         observerList = new ArrayList<Observer>();
     }
