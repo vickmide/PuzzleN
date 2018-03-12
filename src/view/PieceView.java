@@ -54,7 +54,6 @@ public class PieceView extends ImageIcon implements Cloneable{
         return indexColumn;
     }
 
-
     public int getImageSize() {
         return imageSize;
     }

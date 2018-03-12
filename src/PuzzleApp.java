@@ -39,9 +39,9 @@ public class PuzzleApp {
 		String fileSeparator = System.getProperty("file.separator"); // <-- windows: / , linux/iOS: \
 		String imagePath = System.getProperty("user.dir") + fileSeparator + "resources" + fileSeparator;
 
-		String[] imageList = { imagePath + "blank.gif", imagePath + "five.gif", imagePath + "two.gif",
-				imagePath + "seven.gif", imagePath + "four.gif", imagePath + "one.gif", imagePath + "six.gif",
-				imagePath + "three.gif", imagePath + "eight.gif" };
+		String[] imageList = { imagePath + "blank.gif", imagePath + "one.gif", imagePath + "two.gif",
+				imagePath + "three.gif", imagePath + "four.gif", imagePath + "five.gif", imagePath + "six.gif",
+				imagePath + "seven.gif", imagePath + "eight.gif" };
 		
 		//Cargar archivo deseado y colocarlo como puzzle
 		File f = new File(imagePath + "test.png");
@@ -56,22 +56,27 @@ public class PuzzleApp {
 				boardModel.addNewPiece(i * columnNum + j, i, j);
 			}						//   id            x  y
 		}
+		boardModel.shufflePieces();
 
 		//Controlador
 		PuzzleController puzzleController = new PuzzleController();
 		puzzleController.addObserver(boardModel); 
 		
 		
+		
 		// Inicializamos la GUI (muestra datos)
 		PuzzleGUI.initialize(puzzleController, rowNum, columnNum, imageSize, imageList);
 		
 		// Obtenemos la vista del tablero
-		//BoardView WindowsVista = new BoardView(rowNum, columnNum, imageSize, imageList);
 		
 		// AÃ±adimos un nuevo observador al controlador
-		//micontrolador.addObserver(WindowsVista);
+		puzzleController.addObserver(PuzzleGUI.getInstance().getBoardView());
 		
 		// Visualizamos la aplicaciÃ³n.
+		puzzleController.notifyObservers(1, 2);
+		
 		PuzzleGUI.getInstance().setVisible(true);
+		
+		
 	}
 }

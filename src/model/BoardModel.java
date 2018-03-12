@@ -2,31 +2,48 @@ package model;
 
 import java.util.ArrayList;
 
+import view.PieceView;
+
 public class BoardModel<E> extends AbstractModel<E> {
 
-	ArrayList<PieceModel> mispiezas = new ArrayList<PieceModel>();
-	
-	//constructor
+	ArrayList<PieceModel> pieceModel = new ArrayList<PieceModel>();
+
+	// constructor
 	public BoardModel(int rowNum, int columnNum, int pieceSize) {
 		super(rowNum, columnNum, pieceSize);
 		// TODO Auto-generated constructor stub
 	}
 
+	private void changePiece(int a, int b) {
+		PieceModel pAux;
+		pAux = pieceModel.get(a);
+
+		pieceModel.set(a, pieceModel.get(b));
+		pieceModel.set(b, pAux);
+	}
+	
 	@Override
 	public void update(int blankPos, int movedPos) {
-		// TODO Auto-generated method stub
+		changePiece(blankPos, movedPos);
 	}
 
 	@Override
 	public void addNewPiece(int id, int indexRow, int indexCol, String imagePath) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addNewPiece(int id, int indexRow, int indexCol) {
 		// TODO Auto-generated method stub
-		mispiezas.add(new PieceModel(id, indexRow, indexCol));
+		pieceModel.add(new PieceModel(id, indexRow, indexCol));
+	}
+
+	public void shufflePieces() {
+		for (int i = 0; i < pieceModel.size() / 2; i++) {
+			changePiece((int) (Math.random() * 8), (int) (Math.random() * 8));
+		}
+		System.out.println(1);
 	}
 
 	@Override
