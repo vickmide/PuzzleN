@@ -8,15 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Ventana de que contiene informacion sobre la aplicación.
- * @author Miguel Ángel
- * @version 1.0
- */
 public class InfoView extends JDialog implements ActionListener {
 
-    public InfoView(){
-        super(PuzzleGUI.getInstance(), "Información de la aplicación", true);
+	private static final long serialVersionUID = 1L;
+
+	public InfoView(){
+        super(PuzzleGUI.getInstance(), "InformaciÃ³n de la aplicaciÃ³n", true);
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(buildCenter(), BorderLayout.CENTER);
         this.getContentPane().add(buildSouth(), BorderLayout.SOUTH);
@@ -43,20 +40,20 @@ public class InfoView extends JDialog implements ActionListener {
             StyleConstants.setFontFamily(simpleSet, titleFont.getFamily());
             StyleConstants.setFontSize(simpleSet, titleFont.getSize());
             StyleConstants.setBold(simpleSet, true);
-            document.insertString(document.getLength(), "Práctica Asignatura Gestión de Medios Digitales\n\n", simpleSet);
+            document.insertString(document.getLength(), "PrÃ¡ctica Asignatura GestiÃ³n de Medios Digitales\n\n", simpleSet);
 
             simpleSet = new SimpleAttributeSet();
             StyleConstants.setFontFamily(simpleSet, professorFont.getFamily());
             StyleConstants.setFontSize(simpleSet, professorFont.getSize());
             document.insertString(document.getLength(), "Profesores: \n", simpleSet);
-            document.insertString(document.getLength(), "Lucía (lucia.serrano@urjc.es  \n",simpleSet);
-            document.insertString(document.getLength(), "Miguel Ángel (miguel.rodriguez@urjc.es)  \n\n",simpleSet);
+            document.insertString(document.getLength(), "LucÃ­a (lucia.serrano@urjc.es  \n",simpleSet);
+            document.insertString(document.getLength(), "Miguel Ã�ngel (miguel.rodriguez@urjc.es)  \n\n",simpleSet);
 
             simpleSet = new SimpleAttributeSet();
             StyleConstants.setFontFamily(simpleSet, copyrightFont.getFamily());
             StyleConstants.setFontSize(simpleSet, copyrightFont.getSize());
             StyleConstants.setItalic(simpleSet, true);
-            document.insertString(document.getLength(), "Copyright 2016 Miguel Ángel Rodríguez-García (miguel.rodriguez@urjc.es).\n" +
+            document.insertString(document.getLength(), "Copyright 2016 Miguel Ã�ngel RodrÃ­guez-GarcÃ­a (miguel.rodriguez@urjc.es).\n" +
                     " Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
                     " you may not use this file except in compliance with the License.\n" +
                     " You may obtain a copy of the License at\n" +
@@ -69,7 +66,7 @@ public class InfoView extends JDialog implements ActionListener {
                     " See the License for the specific language governing permissions and\n" +
                     " limitations under the License.\n",simpleSet);
         }catch(Exception e){
-            JOptionPane.showMessageDialog(PuzzleGUI.getInstance(), "Error no se puede generar información", "GMD", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(PuzzleGUI.getInstance(), "Error no se puede generar informaciÃ³n", "GMD", JOptionPane.ERROR_MESSAGE);
 
         }
         return(textPane);

@@ -1,10 +1,7 @@
 package view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Clase que representa la vista del tablero
@@ -13,7 +10,8 @@ import java.io.IOException;
  */
 public class PieceView extends ImageIcon implements Cloneable{
 
-    //id de la imagen
+	private static final long serialVersionUID = 1L;
+	//id de la imagen
     private int id;
     //Ã­ndice de fila
     private int indexRow;
@@ -23,27 +21,17 @@ public class PieceView extends ImageIcon implements Cloneable{
     private int imageSize;
     //Imagen
     private Image image;
-
-    public PieceView(int id,int indexRow, int indexColumn,int imageSize,String imagePath) throws IOException{
+    //Borde
+    private Image back;
+   
+    public PieceView(int id, int indexRow, int indexColumn,int imageSize,Image image, Image back){
         super();
         this.id = id;
         this.indexColumn = indexColumn;
         this.indexRow = indexRow;
         this.imageSize = imageSize;
-        //this.imagePath = imagePath;  
-        
-        //Leer un String para sacar el fichero y convertirlo en object Image
-        File fileImage = new File(imagePath);
-        this.image = ImageIO.read(fileImage);
-    }
-
-    public PieceView(int id, int indexRow, int indexColumn,int imageSize,Image image){
-        super();
-        this.id = id;
-        this.indexColumn = indexColumn;
-        this.indexRow = indexRow;
-        this.imageSize = imageSize;
-        this.image = image;     
+        this.image = image.getScaledInstance(imageSize - 5, imageSize - 5, Image.SCALE_DEFAULT);
+        this.back = back.getScaledInstance(imageSize, imageSize, Image.SCALE_DEFAULT);
     }
     
     public int getIndexRow() {
@@ -70,6 +58,10 @@ public class PieceView extends ImageIcon implements Cloneable{
 		return image;
 	}
 
+	public Image getBorder() {
+		return back;
+	}
+	
 	public void setImage(Image image) {
 		this.image = image;
 	}
@@ -78,23 +70,6 @@ public class PieceView extends ImageIcon implements Cloneable{
         return("id:"+id);
     }
     
-    //
-    // METODOS OBSOLETOS 
-    //
-    /*
-    Path de la imagen
-    private String imagePath;
-    
-    public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-	*/
-    //
-	//
-	//
+ 
 
 }

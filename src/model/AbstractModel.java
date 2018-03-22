@@ -2,68 +2,52 @@ package model;
 
 import observer.Observer;
 
-/**
- * Modelo abstracto de datos
- * @author Miguel Ángel
- * @version 1.0
- */
+@SuppressWarnings("hiding")
 public abstract class AbstractModel<PieceModel> implements Observer {
-    //número de filas
-    protected int rowNum=0;
-    //número de columnas
-    protected int columnNum=0;
-    //tamaño de la pieza
-    protected int pieceSize=0;
-    //lista de images
-    protected String[] imageList=null;
 
-    //constructor de la clase.
-    public AbstractModel(int rowNum, int columnNum,int pieceSize, String[] imageList) {
-        this.rowNum = rowNum;
-        this.columnNum = columnNum;
-        this.pieceSize = pieceSize;
-        this.imageList = imageList;
-    }
+	// nÃºmero de filas
+	protected int rowNum = 0;
+	// nÃºmero de columnas
+	protected int columnNum = 0;
+	// tamaÃ±o de la pieza
+	protected int pieceSize = 0;
+	// lista de images
 
-    //constructor de la clase.
-    public AbstractModel(int rowNum, int columnNum,int pieceSize) {
-        this.rowNum = rowNum;
-        this.columnNum = columnNum;
-        this.pieceSize = pieceSize;
-        this.imageList = null;
-    }
+	// constructor de la clase.
+	public AbstractModel(int rowNum, int columnNum, int pieceSize) {
+		this.rowNum = rowNum;
+		this.columnNum = columnNum;
+		this.pieceSize = pieceSize;
+	}
 
-    /**
-     * Añade una nueva pieza en el modelo
-     * @param id identificador de la pieza
-     * @param indexRow índice de fila donde se encuentra ubicada la pieza
-     * @param indexCol índice de columna donde se encuentra ubidada la pieza
-     * @param imagePath ubicación de la imagen.
-     */
-    public abstract void addNewPiece(int id, int indexRow, int indexCol, String imagePath);
+	public abstract void addNewPiece(int id, int indexRow, int indexCol);
 
-    /**
-     * Añade una nueva pieza en el modelo
-     * @param id identificador de la pieza
-     * @param indexRow índice de fila donde se encuentra ubicada la pieza
-     * @param indexCol índice de columna donde se encuentra ubidada la pieza
-     */
-    public abstract void addNewPiece(int id, int indexRow, int indexCol);
+	public abstract boolean isPuzzleSolve();
 
-    //comprueba si el puzzle ha sido solucionado
-    public abstract boolean isPuzzleSolve();
-    //genera movimientos aleatorios
-    public abstract int[] getRandomMovement(int lastPos, int pos);
+	public abstract int[] getRandomMovement(int lastPos, int pos);
 
-    public int getRowCount() {
-        return rowNum;
-    }
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+	}
 
-    public int getColumnCount() {
-        return columnNum;
-    }
+	public void setColumnNum(int columnNum) {
+		this.columnNum = columnNum;
+	}
 
-    public int getPieceSize(){
-        return pieceSize;
-    }
+	public void setPieceSize(int pieceSize) {
+		this.pieceSize = pieceSize;
+	}
+
+	public int getRowCount() {
+		return rowNum;
+	}
+
+	public int getColumnCount() {
+		return columnNum;
+	}
+
+	public int getPieceSize() {
+		return pieceSize;
+	}
+
 }

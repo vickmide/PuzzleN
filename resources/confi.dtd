@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE confi[
+<!ELEMENT confi (rowsNum, columnsNum, imageSize, path, position)*>
+<!ELEMENT rowsNum (#PCDATA)>
+<!ELEMENT columnsNum (#PCDATA)>
+<!ELEMENT imageSize (#PCDATA)>
+<!ELEMENT path (#PCDATA)>
+<!ELEMENT position (posicion)*>
+<!ELEMENT posicion (blank, moved)>
+<!ELEMENT blank (#PCDATA)>
+<!ELEMENT moved (#PCDATA)>
+]>

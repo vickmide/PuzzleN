@@ -3,7 +3,6 @@ import java.io.File;
 import control.PuzzleController;
 import model.BoardModel;
 import model.PieceModel;
-import view.BoardView;
 import view.PuzzleGUI;
 
 /*
@@ -22,61 +21,34 @@ import view.PuzzleGUI;
  * limitations under the License.
  */
 
-/**
- * Clase principal que ejecuta el juego
- * 
- * @Author Miguel Ã�ngel
- * @version 1.0
- */
 public class PuzzleApp {
 
 	public static void main(String args[]) {
 		//Variables
-		int imageSize = 32;
+		int imageSize = -1; //automatico
 		int rowNum = 3;
 		int columnNum = 3;
 
-		String fileSeparator = System.getProperty("file.separator"); // <-- windows: / , linux/iOS: \
+		String fileSeparator = System.getProperty("file.separator");
 		String imagePath = System.getProperty("user.dir") + fileSeparator + "resources" + fileSeparator;
-
-		String[] imageList = { imagePath + "blank.gif", imagePath + "one.gif", imagePath + "two.gif",
-				imagePath + "three.gif", imagePath + "four.gif", imagePath + "five.gif", imagePath + "six.gif",
-				imagePath + "seven.gif", imagePath + "eight.gif" };
 		
 		//Cargar archivo deseado y colocarlo como puzzle
-		File f = new File(imagePath + "test.png");
-		//
+		File f = new File(imagePath + "default.png");
 		
-
-		//Modelo de datos
+		//Modelo de datos 
 		BoardModel<PieceModel> boardModel = new BoardModel<PieceModel>(rowNum, columnNum, imageSize);
-		//Se llena el modelo de datos con el numero de piezas determinado
-		for (int i = 0; i < rowNum; i++) {
-			for (int j = 0; j < columnNum; j++) {
-				boardModel.addNewPiece(i * columnNum + j, i, j);
-			}						//   id            x  y
-		}
-		boardModel.shufflePieces();
-
-		//Controlador
+		
+		//Controlador de datos
 		PuzzleController puzzleController = new PuzzleController();
+		
+		//Vista de datos
+		PuzzleGUI.initialize(puzzleController, rowNum, columnNum, imageSize, f);
+		
+		//Se a�aden el modelo y la vista al controlador
 		puzzleController.addObserver(boardModel); 
+		puzzleController.addObserver(PuzzleGUI.getInstance().getBoardView()); 
 		
-		
-		
-		// Inicializamos la GUI (muestra datos)
-		PuzzleGUI.initialize(puzzleController, rowNum, columnNum, imageSize, imageList);
-		
-		// Obtenemos la vista del tablero
-		
-		// AÃ±adimos un nuevo observador al controlador
-		puzzleController.addObserver(PuzzleGUI.getInstance().getBoardView());
-		
-		// Visualizamos la aplicaciÃ³n.
-		puzzleController.notifyObservers(1, 2);
-		
-		PuzzleGUI.getInstance().setVisible(true);
-		
-		
+		//Se visualiza la aplicaci�n
+		PuzzleGUI.getInstance().setVisible(true);	
 	}
 }
